@@ -1,0 +1,8 @@
+{
+  "name": "Samudra Maritime - Sistem Manajemen Perusahaan Pelayaran",
+  "description": "Aplikasi Manajemen Perusahaan Pelayaran Terpadu: Master Data Kapal, Pelabuhan, Awak & Muatan, Transaksi Booking & Jadwal Voyage, serta Laporan Keuangan & Operasional.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

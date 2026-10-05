@@ -1,0 +1,262 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "User account and profile document",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "manager", "staff"] },
+        "photoURL": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "Vessel": {
+      "title": "Vessel",
+      "description": "Master data for shipping vessels",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string", "minLength": 2, "maxLength": 100 },
+        "code": { "type": "string" },
+        "vesselType": { "type": "string", "enum": ["Container", "Tanker", "Bulk Carrier", "Tugboat & Barge", "Ro-Ro / Passenger"] },
+        "flag": { "type": "string" },
+        "imoNumber": { "type": "string" },
+        "capacityDwt": { "type": "number" },
+        "capacityTeu": { "type": "number" },
+        "yearBuilt": { "type": "number" },
+        "status": { "type": "string", "enum": ["Berlayar", "Sandar/Dermaga", "Maintenance/Dok", "Siap Muat"] },
+        "imageUrl": { "type": "string" },
+        "lengthMeters": { "type": "number" },
+        "beamMeters": { "type": "number" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["name", "code", "vesselType", "status"]
+    },
+    "Port": {
+      "title": "Port",
+      "description": "Master data for sea ports",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "code": { "type": "string" },
+        "name": { "type": "string" },
+        "city": { "type": "string" },
+        "province": { "type": "string" },
+        "country": { "type": "string" },
+        "dockType": { "type": "string" },
+        "draftDepthMeters": { "type": "number" },
+        "berthFeePerDay": { "type": "number" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["code", "name", "city"]
+    },
+    "Cargo": {
+      "title": "Cargo",
+      "description": "Master data for cargo items and base tariffs",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "code": { "type": "string" },
+        "name": { "type": "string" },
+        "category": { "type": "string" },
+        "unit": { "type": "string" },
+        "baseTariffPerUnit": { "type": "number" },
+        "description": { "type": "string" },
+        "hazardClass": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["code", "name", "category", "unit", "baseTariffPerUnit"]
+    },
+    "Crew": {
+      "title": "Crew",
+      "description": "Master data for vessel crew members",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "nik": { "type": "string" },
+        "name": { "type": "string" },
+        "role": { "type": "string" },
+        "assignedVesselId": { "type": "string" },
+        "assignedVesselName": { "type": "string" },
+        "certification": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["nik", "name", "role", "status"]
+    },
+    "Customer": {
+      "title": "Customer",
+      "description": "Master data for clients and shipping customers",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "code": { "type": "string" },
+        "companyName": { "type": "string" },
+        "contactPerson": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "address": { "type": "string" },
+        "category": { "type": "string" },
+        "creditLimit": { "type": "number" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["code", "companyName", "contactPerson", "email"]
+    },
+    "Voyage": {
+      "title": "Voyage",
+      "description": "Transaction data for vessel schedules and voyage routes",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "voyageNumber": { "type": "string" },
+        "vesselId": { "type": "string" },
+        "vesselName": { "type": "string" },
+        "originPortId": { "type": "string" },
+        "originPortName": { "type": "string" },
+        "destinationPortId": { "type": "string" },
+        "destinationPortName": { "type": "string" },
+        "etd": { "type": "string" },
+        "eta": { "type": "string" },
+        "actualDeparture": { "type": "string" },
+        "actualArrival": { "type": "string" },
+        "captainName": { "type": "string" },
+        "status": { "type": "string" },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["voyageNumber", "vesselName", "originPortName", "destinationPortName", "etd", "eta", "status"]
+    },
+    "Booking": {
+      "title": "Booking",
+      "description": "Transaction data for cargo bookings",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "bookingNumber": { "type": "string" },
+        "bookingDate": { "type": "string" },
+        "customerId": { "type": "string" },
+        "customerName": { "type": "string" },
+        "voyageId": { "type": "string" },
+        "voyageNumber": { "type": "string" },
+        "cargoId": { "type": "string" },
+        "cargoName": { "type": "string" },
+        "quantity": { "type": "number" },
+        "unit": { "type": "string" },
+        "originPortName": { "type": "string" },
+        "destinationPortName": { "type": "string" },
+        "totalPrice": { "type": "number" },
+        "status": { "type": "string" },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["bookingNumber", "customerName", "voyageNumber", "cargoName", "quantity", "totalPrice", "status"]
+    },
+    "Manifest": {
+      "title": "Manifest",
+      "description": "Transaction data for cargo manifest items",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "manifestNumber": { "type": "string" },
+        "voyageId": { "type": "string" },
+        "voyageNumber": { "type": "string" },
+        "containerOrSealNo": { "type": "string" },
+        "shipperName": { "type": "string" },
+        "consigneeName": { "type": "string" },
+        "description": { "type": "string" },
+        "weightKg": { "type": "number" },
+        "volumeM3": { "type": "number" },
+        "bayLocation": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["manifestNumber", "voyageNumber", "containerOrSealNo", "shipperName", "consigneeName", "status"]
+    },
+    "Invoice": {
+      "title": "Invoice",
+      "description": "Transaction data for billing and shipping invoices",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "invoiceNumber": { "type": "string" },
+        "bookingId": { "type": "string" },
+        "bookingNumber": { "type": "string" },
+        "customerId": { "type": "string" },
+        "customerName": { "type": "string" },
+        "issueDate": { "type": "string" },
+        "dueDate": { "type": "string" },
+        "freightCharge": { "type": "number" },
+        "handlingFee": { "type": "number" },
+        "portFee": { "type": "number" },
+        "taxAmount": { "type": "number" },
+        "totalAmount": { "type": "number" },
+        "status": { "type": "string" },
+        "paymentMethod": { "type": "string" },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["invoiceNumber", "customerName", "issueDate", "dueDate", "totalAmount", "status"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "Collection of user profiles"
+    },
+    "/vessels/{vesselId}": {
+      "schema": { "$ref": "#/entities/Vessel" },
+      "description": "Master data collection for vessels"
+    },
+    "/ports/{portId}": {
+      "schema": { "$ref": "#/entities/Port" },
+      "description": "Master data collection for ports"
+    },
+    "/cargos/{cargoId}": {
+      "schema": { "$ref": "#/entities/Cargo" },
+      "description": "Master data collection for cargo items"
+    },
+    "/crew/{crewId}": {
+      "schema": { "$ref": "#/entities/Crew" },
+      "description": "Master data collection for crew members"
+    },
+    "/customers/{customerId}": {
+      "schema": { "$ref": "#/entities/Customer" },
+      "description": "Master data collection for customers"
+    },
+    "/voyages/{voyageId}": {
+      "schema": { "$ref": "#/entities/Voyage" },
+      "description": "Transaction collection for voyages"
+    },
+    "/bookings/{bookingId}": {
+      "schema": { "$ref": "#/entities/Booking" },
+      "description": "Transaction collection for bookings"
+    },
+    "/manifests/{manifestId}": {
+      "schema": { "$ref": "#/entities/Manifest" },
+      "description": "Transaction collection for cargo manifests"
+    },
+    "/invoices/{invoiceId}": {
+      "schema": { "$ref": "#/entities/Invoice" },
+      "description": "Transaction collection for invoices"
+    }
+  }
+}
