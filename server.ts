@@ -99,7 +99,7 @@ ${manifestItemsText}`;
   }
 });
 
-// Serve frontend assets
+// Serve frontend assets when running directly as standalone server
 async function startServer() {
   const distPath = path.resolve('dist');
   const isDev = process.env.NODE_ENV !== 'production' && !fs.existsSync(path.resolve(distPath, 'index.html'));
@@ -122,4 +122,8 @@ async function startServer() {
   });
 }
 
-startServer();
+if (process.env.VERCEL !== '1') {
+  startServer();
+}
+
+export default app;
